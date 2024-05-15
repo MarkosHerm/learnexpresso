@@ -22,6 +22,7 @@ router.get('/add', (req, res) => {
 });
 
 router.post('/add', async (req, res) => {
+    req.files.image.mv('./public/images/'  + req.files.image.name);
     await Movie.create({
         name:req.body.movie,
         year: req.body.year,
