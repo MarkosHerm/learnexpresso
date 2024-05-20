@@ -22,15 +22,17 @@ router.get('/add', (req, res) => {
 });
 
 router.post('/add', async (req, res) => {
-    req.files.image.mv('./public/images/'  + req.files.image.name);
-    await Movie.create({
-        name:req.body.movie,
-        year: req.body.year,
-        description: req.body.description,
-        user_id: req.session.user.id
-    });
-    res.redirect('/movies/');
-});
+    req.files.image.mv('./public/images/' + req.files.image.name);
+     await Movie.create({
+         name:req.body.movie,
+         year: req.body.year,
+         description: req.body.description,
+         user_id: req.session.user.id,
+         image: '/images/' + req.files.image.name
+     });
+     res.redirect('/movies/');
+ });
+
 
 router.get('/view', async (req, res) => {
     let movie = await Movie.findOne({

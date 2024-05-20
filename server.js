@@ -1,24 +1,22 @@
 const express = require('express');
-const nunjucks = require('nunjucks');
+const nunjucks = require('nunjucks')
 const app = express();
 const port = 3000;
 const cookieParser = require('cookie-parser');
-const {Movie, User} = require('./models/index.js');
+const { Movie, User } = require('./models/index.js');
+
 const fileUpload = require('express-fileupload');
 app.use(fileUpload());
 
-
 app.use(cookieParser());
-
 app.use(express.static('public'));
-
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 app.use(session({
   store: new FileStore(),
-  secret: 'secret',
   resave: false,
   saveUninitialized: false,
+  secret: 'secret'
 }));
 
 app.use(express.urlencoded({
